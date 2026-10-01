@@ -1,0 +1,104 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Page } from "../App";
+import { Logo, Button, Icon } from "./SharedUI";
+import { getWhatsAppLink } from "../utils/whatsapp";
+import { brandInfo } from "../constants/data";
+
+export default function Header({ page, go }: { page: Page; go: (page: Page) => void }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [sofasDropdown, setSofasDropdown] = useState(false);
+
+  const nav = (next: Page) => { 
+    setMenuOpen(false); 
+    go(next); 
+  };
+
+  return (
+    <>
+      <motion.header 
+        initial={{ y: -100 }} animate={{ y: 0 }} transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className="site-header sticky top-0 z-40 bg-[#f7f3eb] border-b border-[#e8d5d5]/30 w-full"
+      >
+        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 flex items-center justify-between h-[80px]">
+          {/* Logo */}
+          <button className="flex-shrink-0 mr-8" onClick={() => nav("home")} aria-label="Go to home">
+            <Logo compact />
+          </button>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8 text-[11px] font-bold tracking-[0.15em] text-[#3d3129] flex-1 justify-center" aria-label="Primary navigation">
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("home")}>Home</button>
+            
+            {/* Dropdown for Sofas */}
+            <div className="relative" onMouseEnter={() => setSofasDropdown(true)} onMouseLeave={() => setSofasDropdown(false)}>
+              <button className="flex items-center gap-1 hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("products")}>
+                Sofas <Icon name="chevron" size={14} />
+              </button>
+              {sofasDropdown && (
+                <div className="absolute top-full left-0 mt-4 bg-white shadow-xl rounded-sm p-4 min-w-[200px] flex flex-col gap-4 border border-gray-100">
+                  <button className="text-left text-xs tracking-widest text-gray-700 hover:text-amber-800" onClick={() => nav("products")}>All Sofas</button>
+                  <button className="text-left text-xs tracking-widest text-gray-700 hover:text-amber-800" onClick={() => nav("products")}>Premium Collection</button>
+                </div>
+              )}
+            </div>
+
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("products")}>L-Shape Sofas</button>
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("products")}>Sofa Combos</button>
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("products")}>Recliner</button>
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("products")}>Offers</button>
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("contact")}>Become a Dealer</button>
+            <button className="hover:text-amber-800 transition-colors uppercase whitespace-nowrap" onClick={() => nav("contact")}>Contact Us</button>
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-6 ml-8">
+            <button className="hidden lg:flex text-[#3d3129] hover:text-amber-800 transition-colors" aria-label="Search">
+              <Icon name="search" size={20} />
+            </button>
+            
+            <a 
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden lg:flex items-center gap-2 bg-[#b66635] text-white px-6 py-3 rounded-sm text-xs font-bold tracking-[0.1em] uppercase hover:bg-[#96522a] transition-colors whitespace-nowrap"
+            >
+              <Icon name="message" size={16} /> Enquire
+            </a>
+
+            <button className="lg:hidden text-[#3d3129]" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+              <Icon name="menu" size={28} />
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div initial={{ opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }} className="fixed inset-0 z-50 bg-[#f7f3eb]" role="dialog">
+            <div className="p-6 flex justify-between items-center border-b border-[#e8d5d5]/30">
+              <Logo compact />
+              <button onClick={() => setMenuOpen(false)} aria-label="Close menu"><Icon name="close" size={28} /></button>
+            </div>
+            <nav className="p-6 flex flex-col gap-6 text-sm font-bold tracking-[0.15em] text-[#3d3129] uppercase">
+              {["Home", "Sofas", "L-Shape Sofas", "Sofa Combos", "Recliner", "Offers", "Become a Dealer", "Contact Us"].map((item) => (
+                <button key={item} className="flex justify-between items-center py-2 border-b border-[#e8d5d5]/20" onClick={() => nav(item === "Home" ? "home" : item.includes("Contact") || item.includes("Dealer") ? "contact" : "products")}>
+                  <span>{item}</span><Icon name="arrow" size={16} />
+                </button>
+              ))}
+            </nav>
+            <div className="p-6 flex flex-col gap-4 mt-auto">
+              <a href={getWhatsAppLink()} className="flex items-center justify-center gap-2 bg-[#b66635] text-white p-4 rounded-sm font-bold tracking-widest uppercase text-xs">
+                <Icon name="message" size={18} /> Enquire Now
+              </a>
+              <a href={`tel:${brandInfo.phone}`} className="flex items-center justify-center gap-2 border-2 border-[#b66635] text-[#b66635] p-4 rounded-sm font-bold tracking-widest uppercase text-xs">
+                <Icon name="phone" size={18} /> Call Kouch
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

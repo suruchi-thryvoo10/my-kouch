@@ -1,0 +1,10 @@
+{
+  "description": "Explore premium sofas and furniture with Kouch, designed for discerning customers seeking detailed product information and easy enquiry options.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
