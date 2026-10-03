@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Page } from "../App";
 import { motion } from "framer-motion";
 import { Eyebrow } from "../components/SharedUI";
 import { ProductCard } from "../components/ProductCard";
 import { products } from "../constants/data";
 
-export default function Listing({ go, openProduct }: { go: (page: Page) => void; openProduct: (index: number) => void }) {
-  const [active, setActive] = useState("All");
-  const filters = ["All", "Drawing Room", "Sofas", "L-shape sofas", "Recliners", "Sofa Cum Bed"];
-  const filtered = active === "All" ? products : products.filter(p => p.category === active);
+export default function Listing({ go, openProduct, category = "All", searchQuery = "" }: { go: (page: Page) => void; openProduct: (index: number) => void; category?: string; searchQuery?: string }) {
+  const [active, setActive] = useState(category);
+  
+  useEffect(() => {
+    setActive(category);
+  }, [category]);
+
+  const filters = ["All", "Drawing Room", "Sofas", "L-shape sofas", "Sofa combos", "Recliners", "Sofa Cum Bed"];
+  
+  let filtered = active === "All" ? products : products.filter(p => p.category === active);
+  
+  if (searchQuery) {
+    const lowerQuery = searchQuery.toLowerCase();
+    filtered = filtered.filter(p => 
+      p.name.toLowerCase().includes(lowerQuery) || 
+      p.description.toLowerCase().includes(lowerQuery) ||
+      p.category.toLowerCase().includes(lowerQuery)
+    );
+  }
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
