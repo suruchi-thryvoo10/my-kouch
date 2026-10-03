@@ -47,7 +47,7 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
       <ThreeDProductShowcase />
 
       {/* Featured Products */}
-      <section className="collection-section py-24 px-4 md:px-8 bg-[#f7f3eb]">
+      <section className="collection-section py-24 px-6 md:px-12 bg-[#f7f3eb]">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
@@ -56,7 +56,8 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
             </div>
             <Button variant="text" icon="arrow" onClick={() => go("products")}>View all products</Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+          {/* Increased gap-y significantly for mobile so text isn't confused with next image */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-28 md:gap-y-20">
             {products.slice(0, 6).map((product, index) => <ProductCard key={product.id} product={product} index={index} onOpen={() => openProduct(index)} />)}
           </div>
         </div>

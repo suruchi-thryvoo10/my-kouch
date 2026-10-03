@@ -49,13 +49,13 @@ export default function ThreeDProductShowcase() {
   const [activeColor, setActiveColor] = useState("#dcd4c6"); // Default Cream
 
   return (
-    <section id="collection" className="py-24 px-4 md:px-8 bg-[#fbf9f4] text-[#2b211b] relative z-10">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+    <section id="collection" className="py-12 md:py-24 px-4 md:px-8 bg-[#fbf9f4] text-[#2b211b] relative z-10">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 md:gap-12 items-center">
         {/* Left side: details */}
-        <div className="lg:w-1/3 space-y-8">
+        <div className="lg:w-1/3 space-y-6 md:space-y-8">
           <div>
             <h3 className="text-sm tracking-[0.3em] uppercase text-[#8c5a35] font-bold mb-2">Explore Our Collection</h3>
-            <h2 className="text-5xl font-serif text-[#2b211b]">The Signature Sectional</h2>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#2b211b]">The Signature Sectional</h2>
             <p className="mt-4 text-[#594d45] leading-relaxed">
               Experience a completely different level of luxury. 
               Drag to rotate, zoom to explore the premium fabric and leather details of our 3-seater sectional.
@@ -90,7 +90,7 @@ export default function ThreeDProductShowcase() {
         </div>
         
         {/* Right side: 3D Canvas */}
-        <div className="lg:w-2/3 w-full h-[600px] bg-transparent relative cursor-grab active:cursor-grabbing pointer-events-auto">
+        <div className="lg:w-2/3 w-full h-[400px] md:h-[600px] bg-transparent relative cursor-grab active:cursor-grabbing pointer-events-auto">
           <Canvas shadows camera={{ position: [0, 1.5, 4.5], fov: 40 }} gl={{ alpha: true }}>
             <fog attach="fog" args={["#fbf9f4", 10, 20]} />
             <Suspense fallback={null}>
