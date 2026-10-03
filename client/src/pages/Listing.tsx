@@ -24,9 +24,9 @@ export default function Listing({ go, openProduct }: { go: (page: Page) => void;
             <button 
               key={f} 
               onClick={() => setActive(f)}
-              className={`px-6 py-2 rounded-full text-sm tracking-wider uppercase transition-colors ${active === f ? 'bg-[#2b211b] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              className={`px-6 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase transition-all ${active === f ? 'bg-[#2b211b] !text-white shadow-md' : 'bg-gray-200/50 text-[#594d45] hover:bg-gray-200'}`}
             >
-              {f}
+              <span className={active === f ? "!text-white" : ""}>{f}</span>
             </button>
           ))}
         </div>
