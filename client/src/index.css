@@ -427,13 +427,6 @@ body {
   border-bottom: 3px double color-mix(in srgb, var(--brand-brown-reference), transparent 62%);
 }
 
-.site-header::before {
-  content: "";
-  position: absolute;
-  inset: 7px 10px auto;
-  border-top: 1px solid color-mix(in srgb, var(--brand-brown-reference), transparent 82%);
-}
-
 .site-header .logo-button,
 .site-header .logo-crop {
   background: transparent;

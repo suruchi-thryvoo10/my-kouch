@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Page } from "../App";
 import { Logo, Button, Icon } from "./SharedUI";
@@ -8,6 +8,15 @@ import { brandInfo } from "../constants/data";
 export default function Header({ page, go }: { page: Page; go: (page: Page) => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sofasDropdown, setSofasDropdown] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const nav = (next: Page) => { 
     setMenuOpen(false); 
@@ -18,9 +27,9 @@ export default function Header({ page, go }: { page: Page; go: (page: Page) => v
     <>
       <motion.header 
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="site-header sticky top-0 z-40 bg-[#f7f3eb] border-b border-[#e8d5d5]/30 w-full"
+        className={`site-header fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-[#fbf9f4]/95 backdrop-blur-md border-b border-[#e8d5d5]/30 shadow-sm py-0' : 'bg-transparent border-transparent py-2'}`}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 flex items-center justify-between h-[80px]">
+        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between h-[80px]">
           {/* Logo */}
           <button className="flex-shrink-0 mr-8" onClick={() => nav("home")} aria-label="Go to home">
             <Logo compact />
@@ -53,7 +62,7 @@ export default function Header({ page, go }: { page: Page; go: (page: Page) => v
 
           {/* Actions */}
           <div className="flex items-center gap-6 ml-8">
-            <button className="hidden lg:flex text-[#3d3129] hover:text-amber-800 transition-colors" aria-label="Search">
+            <button className="hidden lg:flex text-[#3d3129] hover:text-[#8c5a35] transition-colors" aria-label="Search">
               <Icon name="search" size={20} />
             </button>
             
@@ -61,7 +70,7 @@ export default function Header({ page, go }: { page: Page; go: (page: Page) => v
               href={getWhatsAppLink()}
               target="_blank"
               rel="noreferrer"
-              className="hidden lg:flex items-center gap-2 bg-[#b66635] text-white px-6 py-3 rounded-sm text-xs font-bold tracking-[0.1em] uppercase hover:bg-[#96522a] transition-colors whitespace-nowrap"
+              className="hidden lg:flex items-center gap-2 bg-[#2b211b] text-white px-7 py-3 rounded-sm text-[11px] font-bold tracking-[0.15em] uppercase hover:bg-[#4a3a30] shadow-sm transition-all whitespace-nowrap"
             >
               <Icon name="message" size={16} /> Enquire
             </a>
