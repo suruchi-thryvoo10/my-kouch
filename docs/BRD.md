@@ -7,7 +7,7 @@
 | **Document Version** | 0.1 |
 | **Date** | 2026-10-01 |
 | **Document Status** | Draft |
-| **Prepared By** | Antigravity AI |
+| **Prepared By** | Suruchi Kumari |
 | **Purpose** | To define the business requirements for the new MyKouch premium furniture/sofa website. |
 
 ---
@@ -366,4 +366,4 @@ Enquiry forms must provide actionable context to the sales team.
 
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
-| 0.1 | 2026-10-01 | Initial Draft creation | Antigravity AI |
+| 0.1 | 2026-10-01 | Initial Draft creation | Suruchi Kumari |

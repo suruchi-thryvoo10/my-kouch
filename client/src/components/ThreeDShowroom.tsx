@@ -61,7 +61,7 @@ export default function ThreeDShowroom() {
   }, []);
   
   return (
-    <div className="w-full min-h-[100vh] bg-[#fbf9f4] relative overflow-hidden flex flex-col md:block pt-[70px] md:pt-0">
+    <div className="w-full min-h-[100vh] bg-[#fbf9f4] relative overflow-hidden flex flex-col md:block pt-0 md:pt-0">
       
       {/* 3D Canvas - Stacked on top for mobile, absolute right for desktop */}
       <div className="relative md:absolute md:top-0 md:right-0 w-full md:w-[60%] lg:w-[65%] h-[38vh] md:h-full z-0 cursor-grab active:cursor-grabbing pointer-events-auto shrink-0">
@@ -83,7 +83,7 @@ export default function ThreeDShowroom() {
               makeDefault
             />
             
-            <group position={isMobile ? [0, -0.1, 0] : [0, -0.5, 0]} scale={isMobile ? 0.8 : 1}>
+            <group position={isMobile ? [0, 0.2, 0] : [0, -0.5, 0]} scale={isMobile ? 0.8 : 1}>
               <Stage environment="apartment" intensity={0.3} adjustCamera={1.2} shadows={false}>
                 <SofaModel color={color} />
               </Stage>

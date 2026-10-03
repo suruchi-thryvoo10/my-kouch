@@ -10,7 +10,7 @@
 | **Status** | Draft |
 | **Created Date** | 2026-10-01 |
 | **Last Updated** | 2026-10-01 |
-| **Owner** | Suruchi Kumari (UX Architect / PM) |
+| **Owner** | Suruchi Kumari  |
 | **Related Documents** | `docs/PROJECT-MASTER.md`, `docs/BRD.md`, `docs/prd.md` |
 
 ---
