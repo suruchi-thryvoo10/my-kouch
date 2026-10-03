@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Stage, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
+import { getWhatsAppLink } from "../utils/whatsapp";
 
 function SofaModel({ color }: { color: string }) {
   // Using actual_sofa.glb as a placeholder. (I cannot generate a .glb from images!)
@@ -79,7 +80,7 @@ export default function ThreeDShowroom() {
               maxPolarAngle={Math.PI / 2 + 0.1}
               minPolarAngle={0}
               autoRotate={true}
-              autoRotateSpeed={2.5}
+              autoRotateSpeed={5.0}
               makeDefault
             />
             
@@ -94,7 +95,7 @@ export default function ThreeDShowroom() {
       </div>
 
       {/* Hero Content (Text & Actions) */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-12 flex-1 md:h-full flex flex-col justify-start md:justify-center pointer-events-none pb-12 md:pb-0 pt-0 md:pt-0">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-12 flex-1 md:h-full flex flex-col justify-start md:justify-center pointer-events-none pb-12 md:pb-0 pt-0 md:pt-[90px]">
         <div className="w-full md:w-1/2 pointer-events-none">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
             <span className="text-[#8c5a35] tracking-[0.25em] uppercase text-xs font-bold mb-4 md:mb-6 block">
@@ -117,7 +118,10 @@ export default function ThreeDShowroom() {
               >
                 <span className="text-white opacity-100 relative z-10">Explore Sofas</span>
               </button>
-              <button className="bg-transparent border border-[#2b211b]/30 text-[#2b211b] px-4 sm:px-8 py-3.5 sm:py-4 rounded-sm text-[10px] sm:text-sm font-bold tracking-widest uppercase hover:bg-[#2b211b]/5 hover:border-[#2b211b]/50 transition-all hover:-translate-y-1 shadow-sm cursor-pointer flex items-center justify-center flex-1 md:flex-none whitespace-nowrap min-w-0">
+              <button 
+                onClick={() => window.open(getWhatsAppLink(), '_blank')}
+                className="bg-transparent border border-[#2b211b]/30 text-[#2b211b] px-4 sm:px-8 py-3.5 sm:py-4 rounded-sm text-[10px] sm:text-sm font-bold tracking-widest uppercase hover:bg-[#2b211b]/5 hover:border-[#2b211b]/50 transition-all hover:-translate-y-1 shadow-sm cursor-pointer flex items-center justify-center flex-1 md:flex-none whitespace-nowrap min-w-0"
+              >
                 Enquire Now
               </button>
             </div>
