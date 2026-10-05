@@ -62,12 +62,12 @@ export default function ThreeDShowroom() {
   }, []);
   
   return (
-    <div className="w-full min-h-[100vh] bg-[#fbf9f4] relative overflow-hidden flex flex-col md:block pt-0 md:pt-0">
+    <div className="w-full min-h-[100vh] bg-[#f7f3eb] relative overflow-hidden flex flex-col md:block pt-0 md:pt-0">
       
       {/* 3D Canvas - Stacked on top for mobile, absolute right for desktop */}
       <div className="relative md:absolute md:top-0 md:right-0 w-full md:w-[60%] lg:w-[65%] h-[38vh] md:h-full z-0 cursor-grab active:cursor-grabbing pointer-events-auto shrink-0">
         <Canvas shadows camera={{ position: [0, 1.5, 6], fov: 40 }} gl={{ alpha: true }}>
-          <fog attach="fog" args={["#fbf9f4", 10, 20]} />
+          <fog attach="fog" args={["#f7f3eb", 10, 20]} />
           
           <Suspense fallback={null}>
             <ambientLight intensity={0.6} color="#fffcf5" />

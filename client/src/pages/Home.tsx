@@ -1,17 +1,100 @@
 import { Page } from "../App";
-import { motion } from "framer-motion";
-import { Button, Eyebrow, Icon } from "../components/SharedUI";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Button, Eyebrow, Icon, Logo } from "../components/SharedUI";
 import { ProductCard } from "../components/ProductCard";
-import { categories, products, brandInfo } from "../constants/data";
+import { categories, products, brandInfo, images } from "../constants/data";
 import { getWhatsAppLink } from "../utils/whatsapp";
-import ThreeDShowroom from "../components/ThreeDShowroom";
 import ThreeDProductShowcase from "../components/ThreeDProductShowcase";
+import { useRef } from "react";
 
 export default function Home({ go, openProduct }: { go: (page: Page) => void; openProduct: (index: number) => void }) {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 1000], [0, 250]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -100]);
+
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
-      {/* Hero Section */}
-      <ThreeDShowroom />
+      {/* Cinematic Hero Section */}
+      <section className="relative w-full h-[100svh] overflow-hidden bg-[#2b211b]">
+        {/* Desktop Background with Parallax */}
+        <motion.div 
+          className="absolute inset-0 hidden md:block w-full h-[120%] -top-[10%]"
+          style={{ y: y1 }}
+        >
+          <img 
+            src={images[6] || images[0]} 
+            alt="Premium Kouch Sofa Collection" 
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Subtle vignette/overlay to ensure text readability without hiding the sofa */}
+          <div className="absolute inset-0 bg-white/40 md:bg-white/10 pointer-events-none" />
+        </motion.div>
+
+        {/* Mobile Background with Parallax */}
+        <motion.div 
+          className="absolute inset-0 md:hidden w-full h-[120%] -top-[10%]"
+          style={{ y: y1 }}
+        >
+          <img 
+            src={images[12] || images[1]} 
+            alt="Premium Kouch Sofa Collection" 
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
+
+        {/* Centered Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10 text-[#2b211b] pb-16 md:pb-0">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center max-w-3xl"
+          >
+            {/* Logo Treatment (optional: can use Logo component but ensuring it is white/transparent) */}
+            <h1 className="text-sm tracking-[0.3em] uppercase mb-6 text-white font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              Kouch Collection
+            </h1>
+            
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.1] mb-10 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] !text-white">
+              Comfort That Feels Like Home.
+            </h2>
+            
+
+            
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Button 
+                onClick={() => go("products")}
+                className="!bg-[#2b211b] !text-white hover:!bg-[#4a3a30] !px-10 !py-4 text-sm tracking-widest min-w-[200px] shadow-lg"
+              >
+                Explore Sofas
+              </Button>
+              <Button 
+                variant="ghost"
+                onClick={() => go("products")}
+                className="!bg-white !border-[#2b211b]/20 !text-[#2b211b] hover:!bg-gray-50 !px-10 !py-4 text-sm tracking-widest min-w-[200px] shadow-sm"
+              >
+                Find Your Sofa
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 text-[#2b211b]/80 hidden md:flex"
+        >
+          <span className="text-[10px] uppercase tracking-[0.2em]">Scroll to discover</span>
+          <motion.div 
+            animate={{ y: [0, 8, 0] }} 
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          >
+            <Icon name="arrow" size={16} className="transform rotate-90" />
+          </motion.div>
+        </motion.div>
+      </section>
 
       {/* Categories Horizontal Scroll */}
       <section className="section-shell py-24 px-4 md:px-8 bg-white">
@@ -27,7 +110,7 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
             <motion.button
               key={category.name}
               className="category-card group relative aspect-[4/5] overflow-hidden text-left"
-              onClick={() => go("products")}
+              onClick={() => go("products", { category: category.name })}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

@@ -15,7 +15,7 @@ function ShowcaseModel({ url, color }: { url: string; color: string }) {
         if (child.isMesh && child.material) {
            const materials = Array.isArray(child.material) ? child.material : [child.material];
            materials.forEach((mat: any) => {
-             if (mat.name && (mat.name.toLowerCase().includes("fabric") || mat.name.toLowerCase().includes("leather") || mat.name.toLowerCase().includes("sheen") || mat.name.toLowerCase().includes("cushion") || mat.name.toLowerCase().includes("wood"))) {
+             if (mat.name && (mat.name.toLowerCase().includes("fabric") || mat.name.toLowerCase().includes("leather") || mat.name.toLowerCase().includes("sheen") || mat.name.toLowerCase().includes("cushion") || mat.name.toLowerCase().includes("wood") || mat.name.toLowerCase().includes("sofa"))) {
                const newMat = mat.clone();
                newMat.color = new THREE.Color(color);
                newMat.needsUpdate = true;
@@ -49,7 +49,7 @@ export default function ThreeDProductShowcase() {
   const [activeColor, setActiveColor] = useState("#dcd4c6"); // Default Cream
 
   return (
-    <section id="collection" className="py-12 md:py-24 px-4 md:px-8 bg-[#fbf9f4] text-[#2b211b] relative z-10">
+    <section id="collection" className="py-12 md:py-24 px-4 md:px-8 bg-[#f7f3eb] text-[#2b211b] relative z-10">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 md:gap-12 items-center">
         {/* Left side: details */}
         <div className="lg:w-1/3 space-y-6 md:space-y-8">
@@ -92,7 +92,7 @@ export default function ThreeDProductShowcase() {
         {/* Right side: 3D Canvas */}
         <div className="lg:w-2/3 w-full h-[400px] md:h-[600px] bg-transparent relative cursor-grab active:cursor-grabbing pointer-events-auto">
           <Canvas shadows camera={{ position: [0, 1.5, 4.5], fov: 40 }} gl={{ alpha: true }}>
-            <fog attach="fog" args={["#fbf9f4", 10, 20]} />
+            <fog attach="fog" args={["#f7f3eb", 10, 20]} />
             <Suspense fallback={null}>
               
               <ambientLight intensity={0.6} color="#fffcf5" />
@@ -110,7 +110,7 @@ export default function ThreeDProductShowcase() {
             />
             <group position={[0, -0.5, 0]}>
               <Stage environment="apartment" intensity={0.3} adjustCamera={1.2} shadows={false}>
-                <ShowcaseModel url="/sofa.glb" color={activeColor} />
+                <ShowcaseModel url="/actual_sofa.glb" color={activeColor} />
               </Stage>
               {/* Manual transparent contact shadow to prevent any grey floor rendering */}
               <ContactShadows position={[0, -0.01, 0]} opacity={0.4} scale={5} blur={2.5} far={4} color="#3d3129" />

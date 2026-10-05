@@ -40,7 +40,7 @@ export default function Header({ page, go }: { page: Page; go: (page: Page, para
     <>
       <motion.header 
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`site-header fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-[#fbf9f4]/95 backdrop-blur-md border-b border-[#e8d5d5]/30 shadow-sm py-0' : 'bg-transparent border-transparent py-2'}`}
+        className={`site-header fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-[#f7f3eb]/95 backdrop-blur-md border-b border-[#e8d5d5]/30 shadow-sm py-0' : 'bg-transparent border-transparent py-2'}`}
       >
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between h-[80px]">
           {/* Logo */}

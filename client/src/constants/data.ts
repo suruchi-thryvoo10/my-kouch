@@ -64,19 +64,35 @@ export const images = [
 const drawingRoomImages = Array.from({ length: 41 }, (_, i) => `/Drawing Room 1 (${i + 1}).jpeg`);
 
 // Generate drawing room products
-const drawingRoomProducts = drawingRoomImages.map((image, index) => ({
-  id: `drawing-room-${index + 1}`,
-  image,
-  name: `Drawing Room Collection 0${index + 1}`,
-  category: "Drawing Room",
-  description: "Exquisite drawing room seating meticulously crafted for premium living spaces. Designed with comfort and a bespoke aesthetic in mind.",
-  specifications: [
-    "Premium high-density foam seating",
-    "Solid kiln-dried wood frame",
-    "Stain-resistant luxury fabric",
-    "Customizable dimensions available"
-  ]
-}));
+const drawingRoomProducts = drawingRoomImages.map((image, index) => {
+  const cats = ["Drawing Room", "Sofas", "L-shape sofas", "Sofa combos", "Recliners", "Sofa Cum Bed"];
+  const assignedCategory = cats[index % cats.length];
+  
+  return {
+    id: `drawing-room-${index + 1}`,
+    image,
+    hoverImage: drawingRoomImages[(index + 1) % drawingRoomImages.length],
+    name: `Premium ${assignedCategory} 0${index + 1}`,
+    category: assignedCategory,
+    badge: index % 4 === 0 ? "Featured" : "",
+    colors: ["#dcd4c6", "#6e5548"],
+    seatingCapacity: (index % 3) + 2,
+    setType: ["Corner", "Curved", "Love Seat", "Regular", "Sectional", "Storage"][index % 6],
+    sofaType: ["Motion", "Sofa Cum Beds", "Standard"][index % 3],
+    upholsteryMaterial: ["Fabric", "Leatherette"][index % 2],
+    price: 15000 + (index * 2000),
+    originalPrice: 20000 + (index * 2500),
+    dimensions: `85W x 38D x 34H (inches)`,
+    material: "Premium Velvet",
+    description: `Exquisite ${assignedCategory.toLowerCase()} seating meticulously crafted for premium living spaces. Designed with comfort and a bespoke aesthetic in mind.`,
+    specifications: [
+      "Premium high-density foam seating",
+      "Solid kiln-dried wood frame",
+      "Stain-resistant luxury fabric",
+      "Customizable dimensions available"
+    ]
+  };
+});
 
 const realisticNames = [
   "The Cloud Sectional", "Aura Loveseat", "Oasis L-Shape", "Haven Recliner",
@@ -94,21 +110,72 @@ const realisticCategories = [
   "Sofas", "Sofas"
 ];
 
-const defaultProducts = images.map((image, index) => ({
-  id: `product-${index + 1}`,
-  image,
-  name: realisticNames[index] || `Premium Sofa ${index + 1}`,
-  category: realisticCategories[index] || "Sofas",
-  description: "Experience unparalleled comfort with our meticulously crafted premium sofa, featuring high-resilience foam and durable, luxurious fabrics designed to elevate any living space.",
-  specifications: [
-    "Premium high-density foam seating",
-    "Solid kiln-dried wood frame",
-    "Stain-resistant luxury fabric",
-    "Customizable dimensions available"
-  ]
-}));
+const defaultProducts = images.map((image, index) => {
+  const isNew = index % 5 === 0;
+  const isBestseller = index % 7 === 0;
+  let badge = "";
+  if (isNew) badge = "New Arrival";
+  else if (isBestseller) badge = "Bestseller";
 
-export const products = [...drawingRoomProducts, ...defaultProducts];
+  return {
+    id: `product-${index + 1}`,
+    image,
+    hoverImage: images[(index + 1) % images.length],
+    name: realisticNames[index] || `Premium Sofa ${index + 1}`,
+    category: realisticCategories[index] || "Sofas",
+    badge,
+    colors: ["#dcd4c6", "#6e5548", "#787c80"],
+    seatingCapacity: (index % 3) + 2, // 2, 3, or 4 seater
+    setType: ["Corner", "Curved", "Love Seat", "Regular", "Sectional", "Storage"][index % 6],
+    sofaType: ["Motion", "Sofa Cum Beds", "Standard"][index % 3],
+    upholsteryMaterial: ["Fabric", "Leatherette"][index % 2],
+    price: 25000 + (index * 1500),
+    originalPrice: 32000 + (index * 2000),
+    dimensions: `${80 + (index * 5)}W x 38D x 34H (inches)`,
+    material: "Premium Linen Blend",
+    description: "Experience unparalleled comfort with our meticulously crafted premium sofa, featuring high-resilience foam and durable, luxurious fabrics designed to elevate any living space.",
+    specifications: [
+      "Premium high-density foam seating",
+      "Solid kiln-dried wood frame",
+      "Stain-resistant luxury fabric",
+      "Customizable dimensions available"
+    ]
+  };
+});
+
+const additionalProducts = Array.from({ length: 120 }).map((_, i) => {
+  const targetCats = ["Drawing Room", "Sofas", "L-shape sofas", "Sofa combos", "Recliners", "Sofa Cum Bed"];
+  const cat = targetCats[i % targetCats.length];
+  const allImages = [...drawingRoomImages, ...images];
+  const imgIndex = (i * 7) % allImages.length; // pseudo-random distribution
+  
+  return {
+    id: `extra-product-${i}`,
+    image: allImages[imgIndex],
+    hoverImage: allImages[(imgIndex + 1) % allImages.length],
+    name: `Signature ${cat} 0${i + 1}`,
+    category: cat,
+    badge: i % 7 === 0 ? "Just Added" : i % 11 === 0 ? "Popular" : "",
+    colors: ["#dcd4c6", "#6e5548", "#2c3e50"],
+    seatingCapacity: (i % 3) + 2,
+    setType: ["Corner", "Curved", "Love Seat", "Regular", "Sectional", "Storage"][i % 6],
+    sofaType: ["Motion", "Sofa Cum Beds", "Standard"][i % 3],
+    upholsteryMaterial: ["Fabric", "Leatherette"][i % 2],
+    price: 22000 + (i * 400),
+    originalPrice: 28000 + (i * 500),
+    dimensions: `${80 + (i % 10)}W x 38D x 34H (inches)`,
+    material: i % 2 === 0 ? "Premium Italian Leather" : "Luxury Velvet Blend",
+    description: `Elevate your space with our latest ${cat} collection piece. Experience unparalleled comfort with meticulously crafted premium seating, featuring high-resilience foam and durable fabrics.`,
+    specifications: [
+      "Premium high-density foam seating",
+      "Solid kiln-dried wood frame",
+      "Stain-resistant luxury fabric",
+      "10-year frame warranty"
+    ]
+  };
+});
+
+export const products = [...drawingRoomProducts, ...defaultProducts, ...additionalProducts];
 
 export const categories = [
   { name: "Drawing Room", image: drawingRoomImages[0] },

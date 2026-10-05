@@ -48,7 +48,7 @@ export default function App() {
         <AnimatePresence mode="wait">
           {page === "home" && <Home key="home" go={go} openProduct={openProduct} />}
           {page === "products" && <Listing key="products" go={go} openProduct={openProduct} category={listingCategory} searchQuery={listingSearchQuery} />}
-          {page === "product" && <ProductDetail key="product" product={products[selectedProduct]} go={go} onEnquire={() => {}} />}
+          {page === "product" && <ProductDetail key="product" product={products[selectedProduct]} go={go} onEnquire={() => {}} openProduct={openProduct} />}
           {page === "contact" && <Contact key="contact" />}
           {page === "offers" && <Offers key="offers" go={go} />}
           
