@@ -105,11 +105,11 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
             <p className="text-gray-600 text-lg">Move through the collection by furniture type. Discover bespoke comfort crafted for your unique spaces.</p>
           </div>
         </div>
-        <div className="category-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
+        <div className="flex overflow-x-auto snap-x snap-mandatory md:category-grid md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto hide-scrollbar pb-8 -mx-4 px-4 md:mx-auto md:px-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {categories.map((category, index) => (
             <motion.button
               key={category.name}
-              className="category-card group relative aspect-[4/5] overflow-hidden text-left"
+              className="category-card group relative aspect-[4/5] overflow-hidden text-left flex-shrink-0 w-[75vw] sm:w-[45vw] snap-center md:w-auto md:flex-shrink rounded-md shadow-sm"
               onClick={() => go("products", { category: category.name })}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -140,8 +140,12 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
             <Button variant="text" icon="arrow" onClick={() => go("products")}>View all products</Button>
           </div>
           {/* Increased gap-y significantly for mobile so text isn't confused with next image */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-28 md:gap-y-20">
-            {products.slice(0, 6).map((product, index) => <ProductCard key={product.id} product={product} index={index} onOpen={() => openProduct(index)} />)}
+          <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-28 md:gap-y-20 hide-scrollbar pb-12 -mx-6 px-6 md:mx-0 md:px-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {products.slice(0, 6).map((product, index) => (
+              <div key={product.id} className="w-[85vw] sm:w-[60vw] flex-shrink-0 snap-center md:w-auto md:flex-shrink md:snap-align-none">
+                <ProductCard product={product} index={index} onOpen={() => openProduct(index)} />
+              </div>
+            ))}
           </div>
         </div>
       </section>

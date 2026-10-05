@@ -89,13 +89,13 @@ export default function Listing({ go, openProduct, category = "All", searchQuery
   );
 
   return (
-    <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-gray-50/30 min-h-screen">
+    <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-[#f7f3eb] min-h-screen overflow-x-hidden w-full">
       <section className="bg-[#f7f3eb] py-12 px-4 md:px-8 text-center border-b border-[#e8d5d5]/30">
         <h1 className="text-4xl md:text-5xl font-serif mb-4 text-[#2b211b]">Sofa Collections</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">Explore our curated collections of premium furniture, meticulously crafted for modern living.</p>
       </section>
       
-      <section className="max-w-[1440px] mx-auto py-10 px-4 md:px-8 flex flex-col md:flex-row gap-8 items-start">
+      <section className="max-w-[1440px] mx-auto py-10 px-4 md:px-12 flex flex-col md:flex-row gap-8 items-start w-full overflow-hidden">
         
         {/* Left Sidebar Filters */}
         <aside className="w-full md:w-[280px] flex-shrink-0">
@@ -158,10 +158,10 @@ export default function Listing({ go, openProduct, category = "All", searchQuery
         </aside>
 
         {/* Right Content */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 w-full overflow-hidden box-border">
           
           {/* Top Categories Navigation */}
-          <div className="flex overflow-x-auto pb-4 mb-6 gap-3 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="flex overflow-x-auto pb-4 mb-6 gap-3 hide-scrollbar w-full" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {filters.map(f => (
               <button 
                 key={f} 
@@ -173,12 +173,17 @@ export default function Listing({ go, openProduct, category = "All", searchQuery
             ))}
           </div>
 
-          <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
-            <h2 className="text-2xl font-serif text-[#2b211b]">{active === "All" ? "All Sofa Sets" : active} <span className="text-sm font-sans text-gray-500 font-normal ml-2">({filtered.length} Products Available)</span></h2>
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 pb-4 border-b border-gray-100 gap-2">
+            <h2 className="text-xl md:text-2xl font-serif text-[#2b211b] break-words">
+              {active === "All" ? "All Sofa Sets" : active} 
+              <span className="block sm:inline text-xs md:text-sm font-sans text-gray-500 font-normal sm:ml-2 mt-1 sm:mt-0">
+                ({filtered.length} Products Available)
+              </span>
+            </h2>
           </div>
 
           {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 w-full min-w-0 box-border">
               {filtered.map((product, i) => (
                 <ProductCard key={product.id} product={product} index={i} onOpen={() => openProduct(products.findIndex(p => p.id === product.id))} />
               ))}

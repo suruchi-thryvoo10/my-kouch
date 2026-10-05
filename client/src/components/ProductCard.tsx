@@ -4,7 +4,7 @@ import { Icon } from "./SharedUI";
 export function ProductCard({ product, onOpen, index = 0 }: { product: any; onOpen: () => void; index?: number }) {
   return (
     <motion.article 
-      className="product-card group cursor-pointer flex flex-col h-full relative"
+      className="product-card group cursor-pointer flex flex-col h-full relative w-full min-w-0 overflow-hidden"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -8 }}
@@ -12,17 +12,17 @@ export function ProductCard({ product, onOpen, index = 0 }: { product: any; onOp
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.25, 1, 0.5, 1] }}
       onClick={onOpen}
     >
-      <div className="product-image overflow-hidden relative rounded-md shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out" aria-label={`View ${product.name}`}>
+      <div className="product-image aspect-[4/3] overflow-hidden relative rounded-md shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out" aria-label={`View ${product.name}`}>
         <img 
           src={product.image} 
           alt={`Product view for ${product.name}`} 
-          className="w-full h-full object-cover transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:opacity-0"
+          className={`w-full h-full transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:opacity-0 ${product.image?.includes('.png') ? 'object-contain p-6' : 'object-cover'}`}
         />
         {product.hoverImage && (
           <img 
             src={product.hoverImage} 
             alt={`Alternate product view for ${product.name}`} 
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] scale-110 opacity-0 group-hover:scale-100 group-hover:opacity-100"
+            className={`absolute inset-0 w-full h-full transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] scale-110 opacity-0 group-hover:scale-100 group-hover:opacity-100 ${product.hoverImage?.includes('.png') ? 'object-contain p-6' : 'object-cover'}`}
           />
         )}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-700 pointer-events-none" />
@@ -42,9 +42,9 @@ export function ProductCard({ product, onOpen, index = 0 }: { product: any; onOp
         </span>
       </div>
       
-      <div className="product-copy mt-6 flex flex-col flex-1">
+      <div className="product-copy mt-4 md:mt-6 flex flex-col flex-1 min-w-0 w-full overflow-hidden">
         <div className="flex justify-between items-start">
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[#8c5a35] font-bold transition-colors duration-300">
+          <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#8c5a35] font-bold transition-colors duration-300">
             {product.category} {product.seatingCapacity && ` • ${product.seatingCapacity} Seater`}
           </span>
           {product.colors && (
@@ -56,12 +56,12 @@ export function ProductCard({ product, onOpen, index = 0 }: { product: any; onOp
           )}
         </div>
         
-        <h3 className="text-2xl lg:text-3xl font-serif mt-2 mb-1 text-[#2b211b] transition-colors duration-300 group-hover:text-[#8c5a35]">
+        <h3 className="text-2xl lg:text-3xl font-serif mt-2 mb-1 text-[#2b211b] transition-colors duration-300 group-hover:text-[#8c5a35] truncate w-full">
           {product.name}
         </h3>
 
         {product.price && (
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-3 mb-2 md:mb-3">
             <span className="text-lg font-bold text-[#2b211b]">₹{product.price.toLocaleString()}</span>
             {product.originalPrice && (
               <span className="text-sm text-gray-400 line-through">₹{product.originalPrice.toLocaleString()}</span>
@@ -73,7 +73,7 @@ export function ProductCard({ product, onOpen, index = 0 }: { product: any; onOp
           {product.description}
         </p>
         
-        <div className="mt-5 text-xs tracking-widest uppercase font-bold flex flex-wrap items-center gap-2 text-[#2b211b] transition-all duration-300 group-hover:text-[#8c5a35]">
+        <div className="mt-4 md:mt-5 text-xs tracking-widest uppercase font-bold flex flex-wrap items-center gap-2 text-[#2b211b] transition-all duration-300 group-hover:text-[#8c5a35]">
           <span className="border-b border-transparent group-hover:border-[#8c5a35] pb-1 transition-colors duration-300">View Details</span> 
           <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
             <Icon name="arrow" size={14} />
