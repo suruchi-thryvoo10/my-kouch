@@ -18,9 +18,41 @@
     <meta property="twitter:title" content="Kouch - Comfort that feels like home" />
     <meta property="twitter:description" content="Explore premium sofas for the spaces you live in, designed with comfort, quality craftsmanship, and modern aesthetics." />
     <meta property="twitter:image" content="https://www.mykouch.in/meta-logo.jpg" />
+
+    <style>
+      body {
+        margin: 0;
+        background-color: #ffffff;
+      }
+      .initial-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #f7f3eb;
+      }
+      .initial-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(182, 102, 53, 0.2);
+        border-left-color: #b66635;
+        border-radius: 50%;
+        animation: initial-spin 1s linear infinite;
+      }
+      @keyframes initial-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="initial-loader">
+        <div class="initial-spinner"></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

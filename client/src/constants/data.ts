@@ -175,7 +175,130 @@ const additionalProducts = Array.from({ length: 120 }).map((_, i) => {
   };
 });
 
-export const products = [...drawingRoomProducts, ...defaultProducts, ...additionalProducts];
+const interioReclinerProducts = [
+  {
+    id: 'interio-recliner-1',
+    image: sofa02,
+    hoverImage: sofa08,
+    name: "Milos 1-Seater Manual Recliner with Massager",
+    category: "Recliners",
+    badge: "Bestseller",
+    colors: ["#000000"],
+    seatingCapacity: 1,
+    setType: "Regular",
+    sofaType: "Motion",
+    upholsteryMaterial: "Leatherette",
+    price: 14590,
+    originalPrice: 28923,
+    dimensions: "70W x 102D x 87.5H (cm)",
+    material: "Synthetic Leather",
+    description: "Relax in ultimate comfort with this premium synthetic leather manual recliner featuring an integrated massager. Perfect for unwinding after a long day.",
+    specifications: [
+      "Integrated massaging function",
+      "Premium synthetic leather upholstery",
+      "Manual reclining mechanism",
+      "Knock-down delivery condition"
+    ]
+  },
+  {
+    id: 'interio-recliner-2',
+    image: sofa09,
+    hoverImage: sofa10,
+    name: "Alantra 1-Seater Leatherette Recliner",
+    category: "Recliners",
+    badge: "Premium",
+    colors: ["#2d4059"],
+    seatingCapacity: 1,
+    setType: "Regular",
+    sofaType: "Motion",
+    upholsteryMaterial: "Leatherette",
+    price: 51390,
+    originalPrice: 59531,
+    dimensions: "106W x 111D x 86H (cm)",
+    material: "Synthetic Leather",
+    description: "The Alantra recliner brings elegant styling and superior comfort to your living room. Wrapped in rich blue leatherette for a sophisticated look.",
+    specifications: [
+      "1-Year Warranty",
+      "Premium synthetic leather",
+      "Ergonomic back support",
+      "Sturdy internal frame"
+    ]
+  },
+  {
+    id: 'interio-recliner-3',
+    image: sofa11,
+    hoverImage: sofa12,
+    name: "Ebb Motorised 1-Seater Fabric Lift-Up Recliner",
+    category: "Recliners",
+    badge: "New Arrival",
+    colors: ["#1a1a1a"],
+    seatingCapacity: 1,
+    setType: "Regular",
+    sofaType: "Motion",
+    upholsteryMaterial: "Fabric",
+    price: 58090,
+    originalPrice: 64609,
+    dimensions: "84W x 105D x 90H (cm)",
+    material: "Fabric over Plywood+Pinewood",
+    description: "Experience the convenience of a motorised lift-up mechanism combined with plush fabric upholstery in the Ebb Recliner. Ideal for superior comfort and ease of use.",
+    specifications: [
+      "Motorised lift-up mechanism",
+      "Maximum Inclination: 145 degree",
+      "Plywood and Pinewood frame",
+      "Premium fabric upholstery"
+    ]
+  },
+  {
+    id: 'interio-recliner-4',
+    image: sofa13,
+    hoverImage: sofa14,
+    name: "Parana L-Shape Leather Manual Recliner Sofa",
+    category: "Recliners",
+    badge: "Signature",
+    colors: ["#f5f5dc"],
+    seatingCapacity: 5,
+    setType: "Sectional",
+    sofaType: "Motion",
+    upholsteryMaterial: "Leatherette",
+    price: 143490,
+    originalPrice: 166198,
+    dimensions: "259W x 101D x 155H (cm)",
+    material: "Leather",
+    description: "The Parana L-Shape sofa combines the luxurious feel of genuine leather with the relaxing functionality of a manual recliner, ideal for large living spaces.",
+    specifications: [
+      "L-Shape Sectional design",
+      "Premium leather upholstery",
+      "Manual reclining end seats",
+      "Ideal for rooms above 100 sq ft"
+    ]
+  },
+  {
+    id: 'interio-recliner-5',
+    image: sofa15,
+    hoverImage: sofa16,
+    name: "TuneIn Motorised 3-Seater Fabric Recliner",
+    category: "Recliners",
+    badge: "Featured",
+    colors: ["#dcd4c6"],
+    seatingCapacity: 3,
+    setType: "Regular",
+    sofaType: "Motion",
+    upholsteryMaterial: "Fabric",
+    price: 253390,
+    originalPrice: 293545,
+    dimensions: "294.5W x 119D x 94H (cm)",
+    material: "Fabric",
+    description: "A state-of-the-art motorised 3-seater recliner featuring a built-in console for the ultimate home theater experience.",
+    specifications: [
+      "Motorised reclining mechanism",
+      "Built-in console with storage",
+      "Premium fabric upholstery",
+      "3-Year Warranty"
+    ]
+  }
+];
+
+export const products = [...drawingRoomProducts, ...defaultProducts, ...interioReclinerProducts, ...additionalProducts];
 
 export const categories = [
   { name: "Drawing Room", image: drawingRoomImages[0] },

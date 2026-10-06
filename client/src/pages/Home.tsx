@@ -36,14 +36,14 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
           style={{ y: y1 }}
         >
           <img 
-            src={images[12] || images[1]} 
+            src="/mobile-hero-sec.png" 
             alt="Premium Kouch Sofa Collection" 
             className="w-full h-full object-cover object-center"
           />
         </motion.div>
 
         {/* Centered Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10 text-[#2b211b] pb-16 md:pb-0">
+        <div className="absolute inset-0 flex flex-col items-center justify-end md:justify-center px-6 text-center z-10 text-[#2b211b] pb-32 md:pb-0">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
