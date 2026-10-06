@@ -35,7 +35,7 @@ export default function ProductDetail({
         <div className="flex items-center gap-2 text-xs text-gray-500 uppercase tracking-widest font-medium">
           <button onClick={() => go("home")} className="hover:text-[#b66635] transition-colors">Home</button>
           <Icon name="chevron" size={12} />
-          <button onClick={() => go("products")} className="hover:text-[#b66635] transition-colors">Collections</button>
+          <button onClick={() => go("products", { category: product.category })} className="hover:text-[#b66635] transition-colors">{product.category}</button>
           <Icon name="chevron" size={12} />
           <span className="text-[#2b211b] truncate max-w-[200px] sm:max-w-none">{product.name}</span>
         </div>
@@ -186,7 +186,7 @@ export default function ProductDetail({
             <div className="flex flex-col gap-3 mb-10">
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button className="flex-1 text-sm font-bold tracking-widest py-4" icon="whatsapp" onClick={() => window.open(getWhatsAppLink(product.name), '_blank')}>
-                  Enquire on WhatsApp
+                  Enquire About This Sofa
                 </Button>
                 <Button variant="secondary" className="flex-1 text-sm font-bold tracking-widest py-4" icon="phone" onClick={() => window.open('tel:+918093376990', '_self')}>
                   Call Us

@@ -118,11 +118,11 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
             >
               <img src={category.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90 group-hover:brightness-100" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-              <span className="category-number absolute top-4 left-4 text-white/80 text-xs tracking-widest font-semibold">0{index + 1}</span>
-              <span className="category-name absolute bottom-4 left-4 text-white text-lg font-medium pr-10">{category.name}</span>
               <span className="category-arrow absolute bottom-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300"><Icon name="arrow" /></span>
             </motion.button>
           ))}
+          {/* Spacer to prevent right clipping on mobile scroll */}
+          <div className="w-1 flex-shrink-0 md:hidden"></div>
         </div>
       </section>
 
@@ -146,6 +146,8 @@ export default function Home({ go, openProduct }: { go: (page: Page) => void; op
                 <ProductCard product={product} index={index} onOpen={() => openProduct(index)} />
               </div>
             ))}
+            {/* Spacer to prevent right clipping on mobile scroll */}
+            <div className="w-1 flex-shrink-0 md:hidden"></div>
           </div>
         </div>
       </section>
